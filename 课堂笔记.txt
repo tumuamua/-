@@ -1,0 +1,73 @@
+Git的介绍
+	1.git是一个开源版本控制管理工具 是分布式版本控制 区别于svn的集中式版本控制管理工具
+	2.git和svn的区别
+		svn多个客户端统一操作同一个集中版本库
+		git是每个客户端都算是一版本控制系统，多人共享可以操作统一共享版本库‘
+git的安装
+	本地安装服务器端
+		初始化本地仓库
+			git  GUI 通过图形化工具创建仓库
+			git  bash  git init  初始化仓库
+			git的客户端 右键 创建仓库
+			文件夹下存在.git 目录表名当前的目录下所有文件都被git版本库控制
+	本地安装操作的客户端
+	        新建文件 必须经过 add  添加到暂存区  继续 commit 提交到版本库库控制
+			历史版本追踪   右键点击文件  日志历史  
+			选择对应的版本 右键 重置master 到当前的版本
+			               fix  保留本地和资源库
+						   soft 保留本地还原资源库
+						   hard 还原本地和资源库    开发选择这个
+			删除文件
+				删除本地  提交 本地和资源库都删除了
+				删除资源库保留本地  清除资源库文件 本地保留
+远程仓库连接方式
+	Https  加密后的http协议 为了传输的数据安全
+	       通过github的账号密码即可连接 
+		   命令行的推送方式
+				git remote add origin https://github.com/wygittest/https_2.git
+				git push -u origin master
+
+	SSH    专为远程登录会话和其他网络服务提供安全性的协议
+		SSH通信的前提是 必须本地存储私钥  服务器端存储公钥
+		1.生成使用的公钥和私钥  ssh-keygen -t rsa
+		2.将生成的公钥 配置在远程github服务端
+		3.在命令行中输入命令 添加远端仓库 origin 是默认添加的远端名称
+			git remote add origin git@github.com:wygittest/59_git.git
+		4.在命令行通过命令 推送代码到远端
+			git push -u origin master
+		5.图形化工具推送到远端
+			1.配置网络 选择本地的ssh.exe  git安装路径下的user/bin/ssh.exe
+			2.配置使用的密钥 浏览所有 选择rsa格式的密钥文件  
+			3.添加远端的url路径 自定义名称
+连接远端仓库 克隆代码到本地
+安装配置私有的git服务器
+	1.yum 安装环境 
+		yum -y install curl curl-devel zlib-devel openssl-devel perl cpio expat-devel gettext-devel gcc cc
+	2.上传git的linux安装包 tar解压缩
+	3.cd 进入到解压缩的目录
+	4.autoconf --如果报错 需要先yum install  autoconf
+	5./configure
+	6.make  编译安装文件 如果报错  先 yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker 再执行make命令
+	7.make install 安装
+	8.创建操作版本库的用户 和对应的版本库目录位置
+		adduser -r -c 'git version control' -d /home/git -m git
+	9.passwd git  修改git用户的密码 我使用 git 简单的密码 忽略提醒 确认输入即可
+	10.切换git 用户 创建目录 防止访问的权限不足
+	   su git
+	11.进入到git操作的目录 cd ~  查看是否正确 pwd
+	12.mkdir  privte_repository 文件夹名  作为git的仓库目录
+	13.cd 到privte_repository 仓库目录下 git init 初始化仓库
+推送本地代码到远端仓库
+	1.命令行输入命令   rigin_private 自定义远端名称  ip改成自己的虚拟机    private_git是自己初始化的仓库目录
+		git remote add origin_private ssh://git@192.168.91.136/home/git/private_git
+	2.输入推送的命令
+		git push -u origin master
+	3.输入需要使用的密码 是安装步骤时候给git用户指定的密码 而不是虚拟机的root用户
+clone私有远端代码到本地 
+    1.输入远端的地址 
+	2.输入密码
+	
+	
+	
+	
+    
